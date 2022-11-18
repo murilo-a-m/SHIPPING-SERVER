@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { sign } from "jsonwebtoken";
 
 import { IUsersRepository } from "../../../infrastructure/repositories/IUsersRepositpory";
 import {
@@ -32,10 +33,10 @@ class LoginUserUseCase {
         }
 
         // Realiza a consulta se o usuário já existe
-        const exists = await this.usersRepository.findByUserName(username);
+        const user = await this.usersRepository.findByUserName(username);
 
         // Se o usuário nao exister informa que ele não existe
-        if (!exists) {
+        if (!user) {
             return new NotFound({
                 message: "username did not found",
                 data: {},
@@ -43,7 +44,7 @@ class LoginUserUseCase {
         }
 
         // Verifica se a senha é valida
-        const validPassword = await bcrypt.compare(password, exists.password);
+        const validPassword = await bcrypt.compare(password, user.password);
 
         // Se não é valida informa
         if (!validPassword) {
@@ -54,10 +55,15 @@ class LoginUserUseCase {
             });
         }
 
+        // Gerando token
+        const token = await sign({ id: user.username }, "secret", {
+            expiresIn: "1d",
+        });
+
         // Se é valida informa e direciona
         return new Authorized({
             message: "Authorized, redirect",
-            data: {},
+            data: { token },
         });
     }
 }

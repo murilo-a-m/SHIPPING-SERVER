@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { LoginUserUseCase } from "../../../application/userCases/loginUser/LoginUserUseCase";
+import { LoginUserUseCase } from "../../../application/useCases/Auth/LoginUserUseCase";
 
 // Classe do controller do endpoint de login do usuário
 class LoginUserController {

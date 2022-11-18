@@ -1,4 +1,4 @@
-import { LoginUserUseCase } from "../../../application/userCases/loginUser/LoginUserUseCase";
+import { LoginUserUseCase } from "../../../application/useCases/Auth/LoginUserUseCase";
 import { UsersRepository } from "../../../infrastructure/repositories/implementations/UsersRepository";
 import { LoginUserController } from "./LoginUserController";
 

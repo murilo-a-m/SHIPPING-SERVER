@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { CreateUserUseCase } from "../../../application/userCases/createUser/CreateUserUseCase";
+import { CreateUserUseCase } from "../../../application/useCases/createUser/CreateUserUseCase";
 
 // Classe do controller do endpoint de criação de usuário
 class CreateUserController {
