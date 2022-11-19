@@ -1,8 +1,9 @@
 import { Router } from "express";
 
 import { createUserController } from "../controllers/createUser";
+import { addDefeatController } from "../controllers/defeats";
 import { loginUserController } from "../controllers/LoginUser";
-import { authMidleware } from "../middlewares/authMiddleware";
+import { addWinController } from "../controllers/wins";
 
 const usersRoutes = Router();
 
@@ -14,8 +15,12 @@ usersRoutes.post("/login", async (request, response) => {
     await loginUserController.handle(request, response);
 });
 
-usersRoutes.get("/auth", authMidleware, async (request, response) => {
-    console.log("tetinha");
+usersRoutes.post("/wins/:username", async (request, response) => {
+    await addWinController.handle(request, response);
+});
+
+usersRoutes.post("/defeats/:username", async (request, response) => {
+    await addDefeatController.handle(request, response);
 });
 
 export { usersRoutes };

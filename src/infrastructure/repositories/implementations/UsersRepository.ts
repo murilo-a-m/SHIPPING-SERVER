@@ -22,10 +22,36 @@ class UsersRepository implements IUsersRepository {
             data: {
                 username,
                 password,
-                losses: 0,
                 wins: 0,
+                defeats: 0,
             },
         });
+        return user;
+    }
+
+    async updateWins(username: string, wins: number) {
+        const user = await prisma.user.update({
+            where: {
+                username,
+            },
+            data: {
+                wins,
+            },
+        });
+
+        return user;
+    }
+
+    async updateDefeats(username: string, defeats: number) {
+        const user = await prisma.user.update({
+            where: {
+                username,
+            },
+            data: {
+                defeats,
+            },
+        });
+
         return user;
     }
 }

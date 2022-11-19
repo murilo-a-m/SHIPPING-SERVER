@@ -45,7 +45,7 @@ export function Unauthorized({ data, message }) {
     this.message = message;
 }
 
-export function Authorized({ data, message }) {
+export function Authorized(data, message) {
     this.name = "AUTHORIZED_REDIRECT";
     this.statusCode = 200;
     this.data = data;

@@ -14,7 +14,7 @@ model User {
     username   String   @id @default(uuid())
     password   String
     wins       Int
-    losses     Int
+    defeats    Int
     created_at DateTime @default(now())
 
     @@map("users")

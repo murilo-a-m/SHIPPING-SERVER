@@ -55,16 +55,11 @@ class LoginUserUseCase {
             });
         }
 
-        // Gerando token
-        const token = await sign({ id: user.username }, "secret", {
-            expiresIn: "1d",
-        });
+        // Deleta a senha para retornar o usuário
+        delete user.password;
 
         // Se é valida informa e direciona
-        return new Authorized({
-            message: "Authorized, redirect",
-            data: { token },
-        });
+        return new Authorized(user, "Authorized, redirect");
     }
 }
 
